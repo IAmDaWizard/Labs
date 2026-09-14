@@ -3,4 +3,4 @@ project(Labs)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Labs main.cpp)
+add_subdirectory(lab_01)
