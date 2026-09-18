@@ -1,5 +1,18 @@
 #include <cstddef>
 #include <iostream>
+#include "../include/main.h"
+
+
+aom *initialize_matrices() {
+    aom *matr = new aom;
+    int ***array = new int **[100000]{};
+    std::size_t *r = new size_t[100000]{};
+    std::size_t *c = new size_t[100000]{};
+    matr->array = array;
+    matr->rows = r;
+    matr->cols = c;
+    return matr;
+}
 
 int **matrix_create(std::size_t rows, std::size_t cols) {
     int **matrix = new int *[rows];
@@ -30,10 +43,19 @@ void matrix_fill(int **m, std::size_t rows, std::size_t cols, int value) {
 
 void matrix_print(const int *const*m, std::size_t rows, std::size_t cols) {
     if (m == nullptr) return;
+    std::cout << '\n';
     for (std::size_t i{}; i < rows; i++) {
         for (std::size_t j{}; j < cols; j++) {
             std::cout << m[i][j] << ' ';
         }
         std::cout << '\n';
+    }
+}
+
+void self_completion(int **m, std::size_t rows, std::size_t cols) {
+    if (m == nullptr) return;
+    for (int i{}; i < rows; i++) {
+        std::cout << "Row " << i + 1 << ": ";
+        for (int j{}; j < cols; j++) if (!(std::cin >> m[i][j])) std::cin.clear();
     }
 }
