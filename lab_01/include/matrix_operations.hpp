@@ -2,7 +2,7 @@
 #define LABS_MATRIX_OPERATIONS_H
 #pragma once
 #include <cstddef>
-#include "main.h"
+#include "main.hpp"
 
 aom* initialize_matrices();
 

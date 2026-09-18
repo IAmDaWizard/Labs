@@ -1,0 +1,77 @@
+# Кодстайл лабораторных работ. Проверено с clang-format 20.1.2.
+# Основа: fintech/uservices/.clang-format; только стандартные опции LLVM.
+---
+Language: Cpp
+BasedOnStyle: Google
+Standard: c++20
+
+IndentWidth: 4
+ContinuationIndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+AccessModifierOffset: -4
+NamespaceIndentation: None
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Pointer
+
+BinPackParameters: false
+BinPackArguments: false
+AlignAfterOpenBracket: BlockIndent
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+BreakAfterReturnType: None
+IndentWrappedFunctionNames: false
+IndentRequiresClause: false
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterControlStatement: MultiLine
+InsertBraces: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+
+PenaltyBreakOpenParenthesis: 5000000
+PenaltyIndentedWhitespace: 100000
+PenaltyBreakFirstLessLess: 0
+PenaltyBreakScopeResolution: 20000000
+PenaltyBreakAssignment: 10000
+PenaltyExcessCharacter: 1000000000
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyReturnTypeOnItsOwnLine: 10000000
+
+MaxEmptyLinesToKeep: 1
+InsertNewlineAtEOF: true
+LineEnding: LF
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+# array_ops.hpp — парный для array_ops.cpp и array_ops_test.cpp (категория 0).
+IncludeIsMainRegex: '(_test)?$'
+IncludeCategories:
+    # 1. Известные C- и системные заголовки. Список расширяется под платформу.
+    - Regex: '^<(assert|complex|ctype|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdalign|stdarg|stdatomic|stdbool|stddef|stdint|stdio|stdlib|stdnoreturn|string|tgmath|threads|time|uchar|wchar|wctype)\.h>$'
+      Priority: 1
+      CaseSensitive: true
+    - Regex: '^<((sys|arpa|netinet|net)/[^>]+|unistd\.h|fcntl\.h|pthread\.h|dirent\.h|dlfcn\.h|poll\.h|syslog\.h|netdb\.h|termios\.h|windows\.h|winsock2\.h|ws2tcpip\.h)>$'
+      Priority: 1
+      CaseSensitive: true
+    # 2. Заголовки стандартной библиотеки C++ до C++20 включительно.
+    # Явный список не принимает произвольный <my_library> за стандартный заголовок.
+    - Regex: '^<(algorithm|any|array|atomic|barrier|bit|bitset|charconv|chrono|codecvt|compare|complex|concepts|condition_variable|coroutine|deque|exception|execution|filesystem|format|forward_list|fstream|functional|future|initializer_list|iomanip|ios|iosfwd|iostream|istream|iterator|latch|limits|list|locale|map|memory|memory_resource|mutex|new|numbers|numeric|optional|ostream|queue|random|ranges|ratio|regex|scoped_allocator|semaphore|set|shared_mutex|source_location|span|sstream|stack|stdexcept|stop_token|streambuf|string|string_view|strstream|syncstream|system_error|thread|tuple|type_traits|typeindex|typeinfo|unordered_map|unordered_set|utility|valarray|variant|vector|version)>$'
+      Priority: 2
+      CaseSensitive: true
+    - Regex: '^<(cassert|ccomplex|cctype|cerrno|cfenv|cfloat|cinttypes|ciso646|climits|clocale|cmath|csetjmp|csignal|cstdalign|cstdarg|cstdbool|cstddef|cstdint|cstdio|cstdlib|cstring|ctgmath|ctime|cuchar|cwchar|cwctype)>$'
+      Priority: 2
+      CaseSensitive: true
+    # 3. Остальные <...>: сторонние библиотеки, в том числе gtest и gmock.
+    - Regex: '^<.*>$'
+      Priority: 3
+    # 4. Собственные заголовки в кавычках. Парный заголовок получает категорию 0.
+    - Regex: '^".*"$'
+      Priority: 4
+    - Regex: '.*'
+      Priority: 5
