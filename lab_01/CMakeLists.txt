@@ -1,11 +1,22 @@
-cmake_minimum_required(VERSION 4.1)
-project(lab_01)
-
-set(CMAKE_CXX_STANDARD 20)
-
-add_executable(Labs src/main.cpp
+add_library(lab01_lib
         src/matrix_operations.cpp
-        include/matrix_operations.h
-        include/main.h
         src/algorithm.cpp
-        include/algorithm.h)
+)
+
+target_include_directories(lab01_lib PUBLIC include)
+
+add_executable(lab01 src/main.cpp)
+
+target_link_libraries(lab01 PRIVATE lab01_lib)
+
+add_executable(lab01_tests
+        test/matrix_operations_test.cpp
+        test/algorithm_test.cpp
+)
+
+target_link_libraries(lab01_tests PRIVATE
+        lab01_lib
+        GTest::gtest_main
+)
+
+add_test(NAME Lab01Tests COMMAND lab01_tests)
