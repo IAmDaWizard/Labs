@@ -10,7 +10,7 @@ add_compile_options(
         -Wextra
         -Wpedantic
         -g
-        -fsanitize=address
+        -fsanitize=address,undefined
         -fno-omit-frame-pointer
 )
 
