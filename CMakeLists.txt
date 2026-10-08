@@ -6,12 +6,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(
-        -Wall
-        -Wextra
-        -Wpedantic
-        -g
-        -fsanitize=address,undefined
-        -fno-omit-frame-pointer
+        -Wall #warnings
+        -Wextra #more warnings
+        -Wpedantic #check non-standart extensions
+        -g #debugging info
+        -fsanitize=address,undefined #memory errors, detect undefined behavior
+        -fno-omit-frame-pointer #call stack
 )
 
 add_link_options(-fsanitize=address)
